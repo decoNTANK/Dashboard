@@ -1,10 +1,11 @@
 const express = require("express");
+const cors = require('cors');
 
 const app = express();
 
 const PORT = 3000;
 
-
+app.use(cors());
 app.use(express.json());
 
 
@@ -61,12 +62,24 @@ app.post("/api/bugs", (req, res) => {
         });
     }
 
-    const newBug = {
-        id: bugs.length + 1,
-        title: req.body.title,
-        priority: req.body.priority,
-        status: "OPEN"
-    };
+   const newBug = {
+    id: bugs.length > 0 
+        ? Math.max(...bugs.map(bug => bug.id)) + 1 
+        : 1,
+    title: req.body.title,
+    priority: req.body.priority,
+    status: "OPEN"
+};
+
+    const existingBug = bugs.find(
+    bug => bug.title === req.body.title
+);
+
+if (existingBug) {
+    return res.status(400).json({
+        message: "Bug title already exists"
+    });
+}
 
     bugs.push(newBug);
 
@@ -83,14 +96,27 @@ app.put("/api/bugs/:id", (req, res) => {
 
 
     if (!bug) {
+
         return res.status(404).json({
             message: "Bug not found"
         });
+
     }
 
 
-    bug.title = req.body.title || bug.title;
-    bug.priority = req.body.priority || bug.priority;
+    if (req.body.title) {
+        bug.title = req.body.title;
+    }
+
+
+    if (req.body.priority) {
+        bug.priority = req.body.priority;
+    }
+
+
+    if (req.body.status) {
+        bug.status = req.body.status;
+    }
 
 
     res.json(bug);

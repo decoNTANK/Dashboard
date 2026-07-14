@@ -96,6 +96,7 @@ button {
     padding: 30px;
     margin: 150px auto;
     border-radius: 12px;
+    position: relative;
 }
 
 
@@ -105,4 +106,39 @@ input, select {
     margin: 10px 0;
     border-radius: 6px;
     border: none;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    background: none;
+    border: none;
+
+    font-size: 28px;
+    cursor: pointer;
+}
+.status-badge {
+    display: inline-block;
+    min-width: 80px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status-open {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-testing {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-closed {
+    background-color: #fee2e2;
+    color: #991b1b;
 }

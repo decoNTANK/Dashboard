@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,64 +42,84 @@
 
         <h2>Recent Bugs</h2>
 
-<table data-cy="bug-table">
+        <table data-cy="bug-table">
 
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Priority</th>
-                <th>Status</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-            <tr>
-                <td>BUG-1</td>
-                <td>Login error</td>
-                <td class="high">HIGH</td>
-                <td>Open</td>
-            </tr>
+            <tbody id="bugTableBody">
 
-            <tr>
-                <td>BUG-2</td>
-                <td>Button not working</td>
-                <td class="medium">MEDIUM</td>
-                <td>Testing</td>
-            </tr>
+            </tbody>
 
         </table>
 
     </section>
 
 
-   <button id="createBugBtn" data-cy="create-bug-button">
-    + Create Bug
-</button>
+    <button id="createBugBtn" data-cy="create-bug-button">
+        + Create Bug
+    </button>
 
 
-<div id="bugModal" class="modal">
+    <div id="bugModal" class="modal">
 
     <div class="modal-content">
 
+        <button id="closeModal" class="close-btn">×</button>
+
         <h2>Create New Bug</h2>
 
-        <input 
-    id="bugTitle" 
-    data-cy="bug-title-input"
-    placeholder="Bug title">
-
-        <select id="priority">
-            <option value="HIGH">HIGH</option>
-            <option value="MEDIUM">MEDIUM</option>
-            <option value="LOW">LOW</option>
-        </select>
+            <input 
+                id="bugTitle" 
+                data-cy="bug-title-input"
+                placeholder="Bug title">
 
 
-      <button id="saveBug" data-cy="save-bug-button">
-    Save Bug
+            <select id="priority">
+
+                <option value="HIGH">HIGH</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LOW">LOW</option>
+
+            </select>
+
+
+            <button id="saveBug" data-cy="save-bug-button">
+                Save Bug
+            </button>
+
+
+        </div>
+
+    </div>
+<div id="statusModal" class="modal">
+
+    <div class="modal-content">
+
+        <button id="closeStatusModal" class="close-btn">×</button>
+
+        <h2>Change Status</h2>
+
+        <button 
+    data-cy="status-testing"
+    onclick="selectStatus('TESTING')">
+    TESTING
+</button>
+
+<button 
+    data-cy="status-closed"
+    onclick="selectStatus('CLOSED')">
+    CLOSED
 </button>
 
     </div>
-
-</div>
 
 
 </div>
@@ -107,4 +128,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
