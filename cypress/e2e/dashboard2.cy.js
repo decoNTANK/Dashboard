@@ -307,6 +307,13 @@ describe('QA Dashboard', () => {
       .should('contain', 'CLOSED')
 
   })
+  it("should display API status as OK", () => {
+
+    cy.get("#systemStatus")
+        .should("be.visible")
+        .and("contain", "OK");
+
+});
 
 
 })

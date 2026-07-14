@@ -120,7 +120,8 @@ saveBtn.addEventListener("click", async () => {
 
 
         // Reload bug list after changes
-        loadBugs();
+       loadBugs();
+loadDashboardStats();
 
 
     } catch (error) {
@@ -161,6 +162,7 @@ async function deleteBug(id) {
     if (response.ok) {
 
         loadBugs();
+loadDashboardStats();
 
     }
 
@@ -225,10 +227,57 @@ console.log("Sending PUT request...");
         statusModal.style.display = "none";
 
         loadBugs();
+loadDashboardStats();
 
     }
 
 }
 
+// Load dashboard statistics
+async function loadDashboardStats() {
+
+    try {
+
+        const bugsResponse = await fetch(
+            "http://localhost:3000/api/bugs"
+        );
+
+        const bugs = await bugsResponse.json();
+
+
+        document.getElementById("totalBugs").innerText = bugs.length;
+
+
+        const openBugs = bugs.filter(
+            bug => bug.status === "OPEN"
+        ).length;
+
+
+        document.getElementById("openBugs").innerText = openBugs;
+
+
+
+        const statusResponse = await fetch(
+            "http://localhost:3000/api/status"
+        );
+
+        const status = await statusResponse.json();
+
+
+document.getElementById("systemStatus").innerText = "🟢 " + status.status;
+
+    } catch(error) {
+
+        console.error(error);
+
+        document.getElementById("systemStatus").innerText = "ERROR";
+
+    }
+
+}
+
+
+
 // Initial load
 loadBugs();
+loadDashboardStats();

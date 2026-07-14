@@ -4,14 +4,8 @@
   "description": "A full-stack QA practice project created to demonstrate API testing, test automation and basic frontend/backend development.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:chrome": "cypress run --spec cypress/e2e/dashboard2.cy.js --browser chrome"
   },
-  "scripts": {
-  "cypress:open": "cypress open --browser chrome"
-},
-  "scripts": {
-  "test:chrome": "cypress run --spec cypress/e2e/dashboard2.cy.js --browser chrome"
-},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/decoNTANK/Dashboard.git"
@@ -24,6 +18,9 @@
   },
   "homepage": "https://github.com/decoNTANK/Dashboard#readme",
   "devDependencies": {
-    "cypress": "^15.18.1"
+    "cypress": "^15.18.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2"
   }
 }

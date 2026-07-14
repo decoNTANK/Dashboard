@@ -2,7 +2,7 @@
 
 A full-stack bug tracking dashboard created to practice and demonstrate software testing and test automation skills.
 
-The project contains a simple frontend interface, a Node.js backend API, automated UI tests with Cypress, and API testing with Postman/Newman.
+The project contains a frontend interface, a Node.js REST API backend with CRUD operations, automated UI tests with Cypress, and API testing with Postman/Newman.
 
 ## Project Overview
 
@@ -58,18 +58,33 @@ Prodzs
 │
 ├── backend
 │   ├── server.js
+│   ├── cypress
+│   |    └── ...
+│   ├── package-lock.json
 │   └── package.json
 │
 ├── cypress
-│   └── e2e
-│       └── dashboard.cy.js
+│   ├── e2e
+│   │   └── dashboard2.cy.js
+│   ├── fixtures
+│   ├── screenshots
+│   ├── support
+│   └── reports
+│       ├── mochawesome.json
+│       └── html
+│           └── mochawesome.html
+
 │
 ├── postman
 │   ├── Dashboard2.postman_collection.json
 │   ├── Dashboard2.postman_environment.json
 │   └── newman-reports
+│       └── dashboard-api-report.html
 │
 ├── cypress.config.js
+├── .gitignore
+├── package-lock.json
+├── package.json
 └── README.md
 ```
 
@@ -83,6 +98,7 @@ Automated tests cover:
 
 * Dashboard loading
 * Bug table visibility
+* API status card validation
 * Opening create bug modal
 * Creating a new bug
 * Validation when title is empty
@@ -100,7 +116,7 @@ should change bug status from UI
 
 ---
 
-## API Tests (Cypress + Postman)
+## API Tests (Postman + Newman)
 
 API testing covers:
 
@@ -111,6 +127,10 @@ API testing covers:
 * Duplicate bug validation
 * Update bug status
 * Delete bug
+
+## API Validation with Cypress
+
+* Cypress also validates API-dependent UI elements.
 
 ---
 
@@ -184,6 +204,12 @@ npm run test:chrome
 
 The automated UI tests are executed in Google Chrome browser.
 
+Generate HTML report from Cypress results:
+
+```bash
+npx marge cypress/reports/mochawesome.json --reportDir cypress/reports/html --inline
+```
+
 # Running Postman Tests with Newman
 
 Install Newman:
@@ -211,8 +237,9 @@ newman run postman/Dashboard2.postman_collection.json -r cli,htmlextra
 The project includes:
 
 * Cypress automated UI test suite
+* Cypress HTML test report
 * Postman API collection
-* Newman HTML reports
+* Newman HTML report included in postman/newman-reports
 
 The tests validate both frontend behavior and backend API functionality.
 
@@ -233,4 +260,4 @@ This project was created as a QA automation portfolio project to demonstrate:
 
 # Author
 
-QA Tester / Test Automation Portfolio Project
+Created as an automation portfolio project by Huszty Richárd

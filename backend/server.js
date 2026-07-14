@@ -145,6 +145,20 @@ app.delete("/api/bugs/:id", (req, res) => {
 
 });
 
+// GET system status
+console.log("STATUS ROUTE LOADED");
+
+app.get("/api/status", (req, res) => {
+
+    res.json({
+        status: "OK",
+        service: "Bug Tracker API",
+        timestamp: new Date()
+    });
+
+});
+
+
 app.listen(PORT, () => {
 
     console.log(`Server running on port ${PORT}`);
