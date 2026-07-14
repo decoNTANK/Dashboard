@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "scripts": {
-  "cypress:open": "cypress open --browser \"C:\\Users\\Felhasználó\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe\""
+  "cypress:open": "cypress open --browser chrome"
+},
+  "scripts": {
+  "test:chrome": "cypress run --spec cypress/e2e/dashboard2.cy.js --browser chrome"
 },
   "repository": {
     "type": "git",

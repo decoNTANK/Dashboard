@@ -37,6 +37,10 @@
               "    pm.expect(bug).to.have.property(\"priority\");\r",
               "    pm.expect(bug).to.have.property(\"status\");\r",
               "\r",
+              "    const bugs = pm.response.json();\r",
+              "\r",
+              "pm.collectionVariables.set(\"existingBugId\", bugs[0].id);\r",
+              "\r",
               "});"
             ],
             "type": "text/javascript",
@@ -68,19 +72,16 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 200\", () => {\r",
-              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
               "    pm.response.to.have.status(200);\r",
-              "\r",
               "});\r",
               "\r",
+              "const response = pm.response.json();\r",
               "\r",
-              "pm.test(\"Correct bug returned\", () => {\r",
-              "\r",
-              "    const bug = pm.response.json();\r",
-              "\r",
-              "    pm.expect(bug.id).to.eql(1);\r",
-              "\r",
+              "pm.test(\"Correct bug returned\", function () {\r",
+              "    pm.expect(response.id).to.eql(\r",
+              "        Number(pm.collectionVariables.get(\"existingBugId\"))\r",
+              "    );\r",
               "});"
             ],
             "type": "text/javascript",
@@ -93,14 +94,14 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/bugs/1",
+          "raw": "{{baseUrl}}/api/bugs/{{existingBugId}}",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
             "api",
             "bugs",
-            "1"
+            "{{existingBugId}}"
           ]
         }
       },
@@ -474,6 +475,34 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Update bug status",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"status\": \"CLOSED\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/bugs/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "bugs",
+            "1"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
@@ -507,6 +536,10 @@
     },
     {
       "key": "bugId",
+      "value": ""
+    },
+    {
+      "key": "existingBugId",
       "value": ""
     }
   ]
