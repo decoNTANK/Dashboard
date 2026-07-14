@@ -4,6 +4,8 @@ A full-stack bug tracking dashboard created to practice and demonstrate software
 
 The project contains a frontend interface, a Node.js REST API backend with CRUD operations, automated UI tests with Cypress, and API testing with Postman/Newman.
 
+![QA Dashboard](screenshots/dashboard.png)
+
 ## Project Overview
 
 The application allows users to:
